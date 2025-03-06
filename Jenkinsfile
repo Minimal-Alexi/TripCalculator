@@ -6,7 +6,7 @@ pipeline {
             // Define Docker Hub repository name
             DOCKERHUB_REPO = 'popalexdocker/week7hw'
             // Define Docker image tag
-            DOCKER_IMAGE_TAG = 'latest_v1'
+            DOCKER_IMAGE_TAG = 'latestv1'
         }
     stages {
         stage('Checkout') {
@@ -52,11 +52,6 @@ pipeline {
                 }
                 stage('Push Docker Image to Docker Hub') {
                     steps {
-                    script {
-                        def repo = DOCKERHUB_REPO
-                        def tag = DOCKER_IMAGE_TAG
-                        echo "Pushing image: ${repo}:${tag}"
-                    }
                         script {
                             docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
                                 docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
