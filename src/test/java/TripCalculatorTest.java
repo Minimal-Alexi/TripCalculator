@@ -30,5 +30,9 @@ public class TripCalculatorTest {
         calculator.setDistanceKm(1000);
         calculator.setFuelPricePerLiter(20);
         assertEquals(1000,calculator.getPricePerTrip());
+
+        calculator.setDistanceKm(25.5f);
+        calculator.setFuelPricePerLiter(1.5f);
+        assertEquals(1.9125f,calculator.getPricePerTrip(),0.001);
     }
 }

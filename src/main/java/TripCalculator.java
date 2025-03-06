@@ -1,32 +1,32 @@
 import java.util.Scanner;
 
 public class TripCalculator {
-    private int distanceKm;
-    private int fuelPricePerLiter;
+    private float distanceKm;
+    private float fuelPricePerLiter;
     private final int fuelEfficiency = 20;
     public TripCalculator(){
 
     }
-    public void setDistanceKm(int distanceKm){
+    public void setDistanceKm(float distanceKm){
         if(distanceKm > 0)
         {
             this.distanceKm = distanceKm;
         }
     }
-    public void setFuelPricePerLiter(int fuelPricePerLiter){
+    public void setFuelPricePerLiter(float fuelPricePerLiter){
         if(fuelPricePerLiter > 0)
         {
             this.fuelPricePerLiter = fuelPricePerLiter;
         }
     }
-    public int getDistanceKm(){
+    public float getDistanceKm(){
         return distanceKm;
     }
-    public int getFuelPricePerLiter(){
+    public float getFuelPricePerLiter(){
         return fuelPricePerLiter;
     }
     public float getFuelNeeded(){
-        return ((float) distanceKm / fuelEfficiency);
+        return (distanceKm / fuelEfficiency);
     }
     public float getPricePerTrip(){
         return getFuelNeeded() * fuelPricePerLiter;
