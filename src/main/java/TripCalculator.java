@@ -18,7 +18,7 @@ public class TripCalculator {
         return fuelPricePerLiter;
     }
     public float getPricePerTrip(){
-
+        return ((float) distanceKm / fuelEfficiency) * fuelPricePerLiter;
     }
 
 }
