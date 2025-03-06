@@ -53,8 +53,8 @@ pipeline {
                 stage('Push Docker Image to Docker Hub') {
                     steps {
                     script {
-                        def repo = DOCKERHUB_REPO.toLowerCase()
-                        def tag = DOCKER_IMAGE_TAG.toLowerCase()
+                        def repo = DOCKERHUB_REPO
+                        def tag = DOCKER_IMAGE_TAG
                         echo "Pushing image: ${repo}:${tag}"
                     }
                         script {
