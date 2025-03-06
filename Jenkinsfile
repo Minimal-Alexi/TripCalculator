@@ -52,10 +52,14 @@ pipeline {
                 }
                 stage('Push Docker Image to Docker Hub') {
                     steps {
+                    script {
+                        def repo = DOCKERHUB_REPO.toLowerCase()
+                        def tag = DOCKER_IMAGE_TAG.toLowerCase()
+                        echo "Pushing image: ${repo}:${tag}"
+                    }
                         script {
-                            docker.withRegistry('', DOCKERHUB_CREDENTIALS_ID) {
-                            def image = docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
-                            image.push()
+                            docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                                docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
                             }
                         }
                     }
