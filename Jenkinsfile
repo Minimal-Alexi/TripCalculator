@@ -54,7 +54,8 @@ pipeline {
                     steps {
                         script {
                             docker.withRegistry('', DOCKERHUB_CREDENTIALS_ID) {
-                                docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                            def image = docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                            image.push()
                             }
                         }
                     }
