@@ -6,7 +6,7 @@ pipeline {
             // Define Docker Hub repository name
             DOCKERHUB_REPO = 'popalexdocker/week7hw'
             // Define Docker image tag
-            DOCKER_IMAGE_TAG = 'latestv1'
+            DOCKER_IMAGE_TAG = 'latest_v1'
         }
     stages {
         stage('Checkout') {
@@ -31,33 +31,40 @@ pipeline {
         }
         stage('Publish Test Results') {
             steps {
-                junit '**/target/surefire-reports/*.xml'
+                junit '/target/surefire-reports/*.xml'
             }
         }
         stage('Publish Coverage Report') {
             steps {
-                   recordCoverage(
-                   tools: [[parser: 'JACOCO']],
-                   id: 'jacoco', name: 'JaCoCo Coverage',
-                   sourceCodeRetention: 'EVERY_BUILD',
-        )  }
+                                   recordCoverage(
+                                   tools: [[parser: 'JACOCO']],
+                                   id: 'jacoco', name: 'JaCoCo Coverage',
+                                   sourceCodeRetention: 'EVERY_BUILD',
+                        )
+
+            }
         }
+
          stage('Build Docker Image') {
                     steps {
                         // Build Docker image
                         script {
-                            docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                             bat "docker build -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} ."
                         }
                     }
                 }
                 stage('Push Docker Image to Docker Hub') {
                     steps {
+                        // Push Docker image to Docker Hub
                         script {
-                            docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                                docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                            withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID,
+                                                             usernameVariable: 'DOCKERHUB_USER',
+                                                             passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                                bat "docker login -u %DOCKERHUB_USER% --password %DOCKERHUB_PASSWORD%"
+                                bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
                             }
                         }
                     }
-                }
-    }
+         }
+}
 }
