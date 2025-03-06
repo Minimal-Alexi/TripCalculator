@@ -50,8 +50,8 @@ public class TripCalculator {
 
         System.out.println("Please input the fuel price per liter: ");
         int fuelPricePerLiter = scanner.nextInt();
-        System.out.println("Fuel price per liter: " + tripCalculator.getFuelPricePerLiter());
         tripCalculator.setFuelPricePerLiter(fuelPricePerLiter);
+        System.out.println("Fuel price per liter: " + tripCalculator.getFuelPricePerLiter());
 
         // Calculate
         System.out.println("Total fuel needed for the trip: " + tripCalculator.getFuelNeeded() + "\nTotal price: " + tripCalculator.getPricePerTrip());
