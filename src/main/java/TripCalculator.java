@@ -8,10 +8,16 @@ public class TripCalculator {
 
     }
     public void setDistanceKm(int distanceKm){
-        this.distanceKm = distanceKm;
+        if(distanceKm > 0)
+        {
+            this.distanceKm = distanceKm;
+        }
     }
     public void setFuelPricePerLiter(int fuelPricePerLiter){
-        this.fuelPricePerLiter = fuelPricePerLiter;
+        if(fuelPricePerLiter > 0)
+        {
+            this.fuelPricePerLiter = fuelPricePerLiter;
+        }
     }
     public int getDistanceKm(){
         return distanceKm;
