@@ -4,7 +4,7 @@ pipeline {
             // Define Docker Hub credentials ID
             DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
             // Define Docker Hub repository name
-            DOCKERHUB_REPO = 'popalexdocker/week7_work'
+            DOCKERHUB_REPO = 'popalexdocker/week7hw'
             // Define Docker image tag
             DOCKER_IMAGE_TAG = 'latest_v1'
         }
